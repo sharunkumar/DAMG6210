@@ -10,14 +10,10 @@ To develop a robust and user-friendly Supply Chain Inventory Management Applicat
 
 ## Mission Objectives
 
-### Efficient Inventory Tracking
-Develop a system that enables real-time tracking of inventory levels across multiple locations and warehouses.
+ - **Efficient Inventory Tracking**: Develop a system that enables real-time tracking of inventory levels across multiple locations and warehouses.
 
-### Order Management
-Enable distributors to generate purchase orders, sales orders, and transfer orders seamlessly within the application.
+ - **Order Management**: Enable distributors to generate purchase orders, sales orders, and transfer orders seamlessly within the application.
 
-### Reporting
-Provide advanced data analytics and reporting features to help distributors gain insights into inventory performance.
+ - **Reporting**: Provide advanced data analytics and reporting features to help distributors gain insights into inventory performance.
 
-### Scalability and Integration
-Ensure that the application is scalable to accommodate the growing needs of distributors.
+ - **Scalability and Integration**: Ensure that the application is scalable to accommodate the growing needs of distributors.
