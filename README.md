@@ -21,3 +21,9 @@ To develop a robust and user-friendly Supply Chain Inventory Management Applicat
 - **Inventory Security and Access Control**: Define role-based access control to restrict access to authorized personnel only.
 
 - **Data Backup and Recovery**: Implement regular data backup and disaster recovery procedures to prevent data loss and ensure minimal downtime in the event of system failures or data corruption.
+
+### Project Memebers
+- Sharun
+- Sanket
+- Gayatri
+- Shruthi
