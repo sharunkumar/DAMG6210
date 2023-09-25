@@ -2,7 +2,7 @@
 
 ## Project Topic
 
-Supply Chain Inventory Management
+Supply Chain Inventory Management for Distributors
 
 ## Mission Statement
 
