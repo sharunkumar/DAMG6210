@@ -26,4 +26,4 @@ To develop a robust and user-friendly Supply Chain Inventory Management Applicat
 - Sharun
 - Sanket kesarkar.s@northeastern.edu 
 - Gayatri kumar.gay@northeastern.edu
-- Shruthi
+- Shruthi venkatesh.sh@northeastern.edu
