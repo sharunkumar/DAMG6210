@@ -1,9 +1,5 @@
 # DAMG6210 - Group Project
 
-## Project Topic
-
-Supply Chain Inventory Management for Distributors
-
 ## Assignments
 
 - [P1. Topic and Objectives](P1.%20Topic%20and%20Objectives.md)
