@@ -5,6 +5,7 @@
 - [P1. Topic and Objectives](P1.%20Topic%20and%20Objectives.md)
 - [P2. Database Design, Initial ERD](P2.%20Database%20Design,%20Initial%20ERD.md)
 - [P3. Final ERD](P3.%20Final%20ERD.md)
+- [P4. Database Implementation](P4.%20Database%20Implementation.md)
 
 ## Project Members
 
