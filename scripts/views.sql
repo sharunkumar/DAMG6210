@@ -34,3 +34,8 @@ from [Transaction] t left join TransactionRow r on t.TransactionID = r.transacti
 group by part_id, p
 .PartName, p.[description]
 GO
+create or alter view transaction_logistics as 
+select dbo.calc_distance(f.latitude, f.longitude, t.latitude, t.longitude) [TransportationDistance], [transaction].* from [Transaction] left join [Location] [f] on [Transaction].from_location_id = f.LocationID
+left join [Location] [t] on [Transaction].to_location_id = t.LocationID
+go
+-- select * from transaction_logistics
