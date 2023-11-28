@@ -114,15 +114,15 @@ INSERT INTO [dbo].[Manufacturer] ([ManufacturerName],[location_id]) VALUES
 ('Manufacturer-2',13),
 ('Manufacturer-3',14);
 
---GO
-/*INSERT INTO [dbo].[AssemblyUnit] ([AssemblyUnitName], [brand_id], [location_id]) VALUES 
+GO
+INSERT INTO [dbo].[AssemblyUnit] ([AssemblyUnitName], [brand_id], [location_id]) VALUES 
 ('Assembly Unit 1', 1, 7),
 ('Assembly Unit 2', 2, 8),
 ('Assembly Unit 3', 3, 9),
 ('Assembly Unit 4', 4, 10),
 ('Assembly Unit 5', 5, 11);
 
-
+GO
 INSERT INTO [dbo].[Batch] ([cost], [manufacturer_id], [part_id]) VALUES 
 (1000, 1, 2),
 (1100, 1, 3),
@@ -179,7 +179,7 @@ INSERT INTO [dbo].[Batch] ([cost], [manufacturer_id], [part_id]) VALUES
 (2400, 3, 16),
 (2500, 3, 17),
 (2600, 3, 18),
-(2700, 3, 19); */
+(2700, 3, 19); 
 
 
 
