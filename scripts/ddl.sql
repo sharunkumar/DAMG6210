@@ -164,7 +164,9 @@ GO
 CREATE TABLE [dbo].[User]
 (
 	[UserID] [int] IDENTITY(1,1) NOT NULL,
-	[UserName] [varchar](250) NOT NULL,
+	[UserName] [varchar](250) NOT NULL UNIQUE,
+	[FirstName] [varchar] (250) NOT NULL,
+	[LastName] [varchar] (250) NOT NULL,
 	CONSTRAINT [User_pkey] PRIMARY KEY CLUSTERED ( [UserID] ASC )
 )
 GO
@@ -306,6 +308,14 @@ REFERENCES [dbo].[TransportType] ([TransportTypeID])
 ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Transport] CHECK CONSTRAINT [Transport_type_id_fkey]
+GO
+-- computed columns
+alter table TransactionRow add total_price as unit_price * quantity
+GO
+alter table Car add years_in_production as DATEDIFF
+(year, production_year_start, production_year_end)
+GO
+alter table Car add currently_in_production as case when getdate() < production_year_end then 1 else 0 end
 GO
 USE [master]
 GO

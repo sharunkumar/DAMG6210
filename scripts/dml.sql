@@ -1,13 +1,13 @@
 USE [DAMG]
 GO
-INSERT INTO [dbo].[User] ([UserName]) VALUES 
-('John Doe'),
-('Jane Smith'),
-('Alice Johnson'),
-('Bob Williams'),
-('Eva Brown'),
-('Michael Davis'),
-('Sophia White');
+INSERT INTO [dbo].[User] ([UserName],[FirstName],[LastName]) VALUES 
+('JohnDoe', 'John', 'Doe' ),
+('JaneSmith', 'Jane', 'Smith'),
+('AliceJohnson', 'Alice', 'Johnson'),
+('BobWilliams', 'Bob', 'Williams'),
+('EvaBrown', 'Eva', 'Brown'),
+('MichaelDavis', 'Michael', 'Davis'),
+('SophiaWhite', 'Sophia', 'White');
 
 GO
 INSERT INTO [dbo].[TransportType] ([description]) VALUES 
