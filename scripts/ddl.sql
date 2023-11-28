@@ -133,6 +133,8 @@ CREATE TABLE [dbo].[Transaction]
 GO
 ALTER TABLE [dbo].[Transaction] ADD  CONSTRAINT [Transaction_created_date_df]  DEFAULT (getdate()) FOR [created_date]
 GO
+ALTER TABLE [dbo].[Transaction] ADD  CONSTRAINT [Transaction_updated_date_df]  DEFAULT (getdate()) FOR [updated_date]
+GO
 CREATE TABLE [dbo].[TransactionRow]
 (
 	[TransactionRowID] [int] IDENTITY(1,1) NOT NULL,
