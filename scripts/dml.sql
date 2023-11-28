@@ -149,7 +149,7 @@ INSERT INTO [dbo].[Batch] ([cost], [manufacturer_id], [part_id]) VALUES
 (2400, 1, 16),
 (2500, 1, 17),
 (2600, 1, 18),
-(2700, 1, 19),
+(2700, 1, 1),
 
 (1000, 2, 2),
 (1100, 2, 3),
@@ -168,7 +168,7 @@ INSERT INTO [dbo].[Batch] ([cost], [manufacturer_id], [part_id]) VALUES
 (2400, 2, 16),
 (2500, 2, 17),
 (2600, 2, 18),
-(2700, 2, 19),
+(2700, 2, 1),
 
 (1000, 3, 2),
 (1100, 3, 3),
@@ -187,7 +187,7 @@ INSERT INTO [dbo].[Batch] ([cost], [manufacturer_id], [part_id]) VALUES
 (2400, 3, 16),
 (2500, 3, 17),
 (2600, 3, 18),
-(2700, 3, 19); 
+(2700, 3, 1); 
 
 
 
@@ -217,3 +217,6 @@ INSERT INTO [dbo].[Location] ([street], [city], [zip], [latitude], [longitude]) 
 ('666 Dudley Rd', 'Goa', 6666, 27.7604, -95.3698),
 ('777 East Rd', 'Kerala', 7777, 28.7604, -96.3698),
 ('888 West Rd', 'Punjab', 8888, 29.7604, -97.3698);
+
+
+Select * from Part
