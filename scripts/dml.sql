@@ -50,7 +50,15 @@ INSERT INTO [dbo].[Location] ([street], [city], [zip], [latitude], [longitude]) 
 ('101 Elm Blvd', 'Metropolis', 98765, 37.7749, -122.4194),
 ('202 Maple Dr', 'Hamletville', 13579, 32.7157, -117.1611),
 ('303 Birch Ct', 'Ruraltown', 24680, 38.9072, -77.0370),
-('404 Cedar Rd', 'Suburbia', 11223, 29.7604, -95.3698);
+('404 Cedar Rd', 'Suburbia', 11223, 29.7604, -95.3698),
+('111 Alpha Rd', 'Delhi', 1111, 22.7604, -99.3698),
+('222 Gamma Rd', 'Mumbai', 2222, 23.7604, -91.3698),
+('333 Beta Rd', 'Chennai', 3333, 24.7604, -92.3698),
+('444 Acorn Rd', 'Kolkata', 4444, 25.7604, -93.3698),
+('555 Cedar Rd', 'Hyderabad', 5555, 26.7604, -94.3698),
+('666 Dudley Rd', 'Goa', 6666, 27.7604, -95.3698),
+('777 East Rd', 'Kerala', 7777, 28.7604, -96.3698),
+('888 West Rd', 'Punjab', 8888, 29.7604, -97.3698);
 
 GO
 INSERT INTO [dbo].[Transaction] ([transaction_type], [created_user_id], [updated_user_id], [transported_by_id], [from_location_id], [to_location_id]) VALUES 
