@@ -75,6 +75,7 @@ model Transport {
   TransportID             Int           @id @default(autoincrement())
   TransportName           String        @db.VarChar(250)
   type_id                 Int
+  cost_per_km             Float
   TransportedTransactions Transaction[]
   type                    TransportType @relation(fields: [type_id], references: [TransportTypeID])
 }
