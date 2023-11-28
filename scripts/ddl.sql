@@ -164,7 +164,9 @@ GO
 CREATE TABLE [dbo].[User]
 (
 	[UserID] [int] IDENTITY(1,1) NOT NULL,
-	[UserName] [varchar](250) NOT NULL,
+	[UserName] [varchar](250) NOT NULL UNIQUE,
+	[FirstName] [varchar] (250) NOT NULL,
+	[LastName] [varchar] (250) NOT NULL,
 	CONSTRAINT [User_pkey] PRIMARY KEY CLUSTERED ( [UserID] ASC )
 )
 GO
