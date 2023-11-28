@@ -8,16 +8,18 @@ datasource db {
 }
 
 model Car {
-  CarID                 Int             @id @default(autoincrement())
-  CarName               String          @db.VarChar(250)
-  production_year_start DateTime        @db.DateTimeOffset
-  production_year_end   DateTime        @db.DateTimeOffset
-  brand_id              Int
-  type_id               Int
-  brand                 Brand           @relation(fields: [brand_id], references: [BrandID])
-  type                  CarType         @relation(fields: [type_id], references: [CarTypeID])
-  CarBlueprint          CarBlueprint[]
-  CarProduction         CarProduction[]
+  CarID                   Int             @id @default(autoincrement())
+  CarName                 String          @db.VarChar(250)
+  production_year_start   DateTime        @db.DateTimeOffset
+  production_year_end     DateTime        @db.DateTimeOffset
+  brand_id                Int
+  type_id                 Int
+  years_in_production     Int?
+  currently_in_production Int
+  brand                   Brand           @relation(fields: [brand_id], references: [BrandID])
+  type                    CarType         @relation(fields: [type_id], references: [CarTypeID])
+  CarBlueprint            CarBlueprint[]
+  CarProduction           CarProduction[]
 }
 
 model CarType {
@@ -112,11 +114,14 @@ model Stock {
   loction     Location @relation(fields: [location_id], references: [LocationID])
 
   @@unique([batch_id, location_id])
+  @@index([batch_id], map: "idx_batch")
 }
 
 model User {
   UserID              Int           @id @default(autoincrement())
-  UserName            String        @db.VarChar(250)
+  UserName            String        @unique(map: "User_Username") @db.VarChar(250)
+  FirstName           String        @db.VarChar(250)
+  LastName            String        @db.VarChar(250)
   CreatedTransactions Transaction[] @relation("REL_TX_USER_CREATE")
   UpdatedTransactions Transaction[] @relation("REL_TX_USER_UPDATE")
 }
@@ -166,6 +171,11 @@ model Transaction {
   transported_by    Transport        @relation(fields: [transported_by_id], references: [TransportID])
   updated_by        User             @relation("REL_TX_USER_UPDATE", fields: [updated_user_id], references: [UserID], onUpdate: NoAction)
   Rows              TransactionRow[]
+
+  @@index([created_user_id], map: "idx_created_user")
+  @@index([from_location_id], map: "idx_from_location")
+  @@index([to_location_id], map: "idx_to_location")
+  @@index([transaction_type], map: "idx_transactions_date")
 }
 
 model TransactionRow {
@@ -174,8 +184,11 @@ model TransactionRow {
   unit_price       Float
   part_batch_id    Int
   transaction_id   Int
+  total_price      Float
   part             Batch       @relation(fields: [part_batch_id], references: [BatchID])
   Transaction      Transaction @relation(fields: [transaction_id], references: [TransactionID])
+
+  @@index([part_batch_id], map: "idx_batch_tx")
 }
 
 model TransactionType {

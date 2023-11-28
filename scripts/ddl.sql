@@ -164,10 +164,11 @@ GO
 CREATE TABLE [dbo].[User]
 (
 	[UserID] [int] IDENTITY(1,1) NOT NULL,
-	[UserName] [varchar](250) NOT NULL UNIQUE,
+	[UserName] [varchar](250) NOT NULL,
 	[FirstName] [varchar] (250) NOT NULL,
 	[LastName] [varchar] (250) NOT NULL,
-	CONSTRAINT [User_pkey] PRIMARY KEY CLUSTERED ( [UserID] ASC )
+	CONSTRAINT [User_pkey] PRIMARY KEY CLUSTERED ( [UserID] ASC ),
+	CONSTRAINT [User_Username] UNIQUE NONCLUSTERED ( [UserName] ASC ),
 )
 GO
 ALTER TABLE [dbo].[AssemblyUnit]  WITH CHECK ADD  CONSTRAINT [AssemblyUnit_brand_id_fkey] FOREIGN KEY([brand_id])
