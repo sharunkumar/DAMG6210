@@ -25,3 +25,13 @@ as
     from [Transaction]
     where transaction_type = 'T'
 GO
+-- reporting related views
+GO
+select part_id, p.PartName, p.[description], sum(total_price) [Total_Sales]
+from [Transaction] t left join TransactionRow r on t.TransactionID = r.transaction_id and transaction_type = 'S'
+    left join Batch b on r.part_batch_id = b.BatchID
+    left join Part p on p.PartID = b.BatchID
+group by part_id, p
+.PartName, p.[description]
+order by Total_Sales desc
+GO
