@@ -15,11 +15,11 @@ INSERT INTO [dbo].[TransportType] ([description]) VALUES
 ('Airplane'),
 ('Train')
 GO
-INSERT INTO [dbo].[Transport] ([TransportName], [type_id]) VALUES 
-('Car', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Road')),
-('Cargo Ship', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Ship')),
-('Boeing 747', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Airplane')),
-('Express Train', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Train'))
+INSERT INTO [dbo].[Transport] ([TransportName], [type_id], [cost_per_km]) VALUES 
+('Car', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Road'), 30),
+('Cargo Ship', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Ship'), 40),
+('Boeing 747', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Airplane'), 50),
+('Express Train', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Train'), 45)
 GO
 INSERT INTO [dbo].[TransactionType] ([transaction_code], [TransactionTypeName]) VALUES 
 ('P', 'Purchase'),

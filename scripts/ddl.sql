@@ -157,6 +157,7 @@ CREATE TABLE [dbo].[Transport]
 	[TransportID] [int] IDENTITY(1,1) NOT NULL,
 	[TransportName] [varchar](250) NOT NULL,
 	[type_id] [int] NOT NULL,
+	[cost_per_km] float not null,
 	CONSTRAINT [Transport_pkey] PRIMARY KEY CLUSTERED ( [TransportID] ASC )
 )
 GO
