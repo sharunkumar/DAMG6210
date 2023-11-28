@@ -1,5 +1,5 @@
 USE [DAMG]
-
+GO
 INSERT INTO [dbo].[User] ([UserName]) VALUES 
 ('John Doe'),
 ('Jane Smith'),
@@ -9,6 +9,7 @@ INSERT INTO [dbo].[User] ([UserName]) VALUES
 ('Michael Davis'),
 ('Sophia White');
 
+GO
 INSERT INTO [dbo].[TransportType] ([description]) VALUES 
 ('Road'),
 ('Ship'),
@@ -18,6 +19,8 @@ INSERT INTO [dbo].[TransportType] ([description]) VALUES
 ('Motorcycle'),
 ('Boat');
 
+
+GO
 INSERT INTO [dbo].[Transport] ([TransportName], [type_id]) VALUES 
 ('Car', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Road')),
 ('Cargo Ship', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Ship')),
@@ -27,6 +30,8 @@ INSERT INTO [dbo].[Transport] ([TransportName], [type_id]) VALUES
 ('Harley Davidson', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Motorcycle')),
 ('Sailboat', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Boat'));
 
+
+GO
 INSERT INTO [dbo].[TransactionType] ([transaction_code], [TransactionTypeName]) VALUES 
 ('P', 'Purchase'),
 ('S', 'Sale'),
@@ -36,6 +41,8 @@ INSERT INTO [dbo].[TransactionType] ([transaction_code], [TransactionTypeName]) 
 ('L', 'Loss'),
 ('C', 'Correction');
 
+
+GO
 INSERT INTO [dbo].[Location] ([street], [city], [zip], [latitude], [longitude]) VALUES 
 ('123 Main St', 'Cityville', 12345, 40.7128, -74.0060),
 ('456 Oak Ave', 'Townburg', 54321, 34.0522, -118.2437),
@@ -45,6 +52,7 @@ INSERT INTO [dbo].[Location] ([street], [city], [zip], [latitude], [longitude]) 
 ('303 Birch Ct', 'Ruraltown', 24680, 38.9072, -77.0370),
 ('404 Cedar Rd', 'Suburbia', 11223, 29.7604, -95.3698);
 
+GO
 INSERT INTO [dbo].[Transaction] ([transaction_type], [created_user_id], [updated_user_id], [transported_by_id], [from_location_id], [to_location_id]) VALUES 
 ('P', 1, 1, 2, 3, 1),
 ('S', 2, 2, 4, 5, 2),
@@ -54,6 +62,7 @@ INSERT INTO [dbo].[Transaction] ([transaction_type], [created_user_id], [updated
 ('L', 6, 6, 5, 6, 6),
 ('C', 7, 7, 2, 3, 7);
 
+GO
 INSERT INTO [dbo].[Supplier] ([SupplierName], [location_id]) VALUES 
 ('Supplier A', 1),
 ('Supplier B', 2),
@@ -63,7 +72,7 @@ INSERT INTO [dbo].[Supplier] ([SupplierName], [location_id]) VALUES
 ('Supplier F', 6),
 ('Supplier G', 7);
 
-
+GO
 INSERT INTO [dbo].[Brand] ([BrandName],[location_id]) VALUES 
 ('GM Parts', 7),
 ('Car Care',8),
@@ -71,6 +80,8 @@ INSERT INTO [dbo].[Brand] ([BrandName],[location_id]) VALUES
 ('Central Part', 10),
 ('3M Products', 11);
 
+
+GO
 INSERT INTO [dbo].[Part] ([PartName], [description], [brand_id]) VALUES 
 ('GM-Engine', 'The engine block features parts such as the timing chain, camshaft, crankshaft, spark plugs, cylinder heads, valves and pistons.',1),
 ('3M-Engine', 'The engine block features parts such as the timing chain, camshaft, crankshaft', 5),
@@ -97,14 +108,14 @@ INSERT INTO [dbo].[Part] ([PartName], [description], [brand_id]) VALUES
 ('CentalPart-Brake','Central Part brakes are one of the most important safety systems on your vehicle', 4);
 
 
-
+GO
 INSERT INTO [dbo].[Manufacturer] ([ManufacturerName],[location_id]) VALUES 
 ('Manufacturer-1',12),
 ('Manufacturer-2',13),
 ('Manufacturer-3',14);
 
-
-INSERT INTO [dbo].[AssemblyUnit] ([AssemblyUnitName], [brand_id], [location_id]) VALUES 
+--GO
+/*INSERT INTO [dbo].[AssemblyUnit] ([AssemblyUnitName], [brand_id], [location_id]) VALUES 
 ('Assembly Unit 1', 1, 7),
 ('Assembly Unit 2', 2, 8),
 ('Assembly Unit 3', 3, 9),
@@ -168,11 +179,11 @@ INSERT INTO [dbo].[Batch] ([cost], [manufacturer_id], [part_id]) VALUES
 (2400, 3, 16),
 (2500, 3, 17),
 (2600, 3, 18),
-(2700, 3, 19);
+(2700, 3, 19); */
 
 
 
-
+GO
 INSERT INTO [dbo].[CarType] ([CarTypeName], [description], [is_electric]) VALUES 
 ('Sedan','Medium size vehicle',0),
 ('i-Sedan','Medium size e-vehicle',1),
@@ -187,3 +198,14 @@ INSERT INTO [dbo].[CarType] ([CarTypeName], [description], [is_electric]) VALUES
 ('i-Bike', 'electric two wheeler',1),
 ('Bus', 'public transport',0),
 ('i-Bus', 'electric public transport',1);
+
+GO
+INSERT INTO [dbo].[Location] ([street], [city], [zip], [latitude], [longitude]) VALUES 
+('111 Alpha Rd', 'Delhi', 1111, 22.7604, -99.3698),
+('222 Gamma Rd', 'Mumbai', 2222, 23.7604, -91.3698),
+('333 Beta Rd', 'Chennai', 3333, 24.7604, -92.3698),
+('444 Acorn Rd', 'Kolkata', 4444, 25.7604, -93.3698),
+('555 Cedar Rd', 'Hyderabad', 5555, 26.7604, -94.3698),
+('666 Dudley Rd', 'Goa', 6666, 27.7604, -95.3698),
+('777 East Rd', 'Kerala', 7777, 28.7604, -96.3698),
+('888 West Rd', 'Punjab', 8888, 29.7604, -97.3698);
