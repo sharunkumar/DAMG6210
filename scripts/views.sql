@@ -27,11 +27,15 @@ as
 GO
 -- reporting related views
 GO
-select part_id, p.PartName, p.[description], sum(total_price) [Total_Sales]
+create or alter view sales_by_parts as select part_id, p.PartName, p.[description], sum(total_price) [Total_Sales]
 from [Transaction] t left join TransactionRow r on t.TransactionID = r.transaction_id and transaction_type = 'S'
     left join Batch b on r.part_batch_id = b.BatchID
     left join Part p on p.PartID = b.BatchID
 group by part_id, p
 .PartName, p.[description]
-order by Total_Sales desc
 GO
+create or alter view transaction_logistics as 
+select dbo.calc_distance(f.latitude, f.longitude, t.latitude, t.longitude) [TransportationDistance], [transaction].* from [Transaction] left join [Location] [f] on [Transaction].from_location_id = f.LocationID
+left join [Location] [t] on [Transaction].to_location_id = t.LocationID
+go
+-- select * from transaction_logistics

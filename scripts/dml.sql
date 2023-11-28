@@ -1,36 +1,25 @@
 USE [DAMG]
 GO
 INSERT INTO [dbo].[User] ([UserName],[FirstName],[LastName]) VALUES 
-('JohnDoe', 'John', 'Doe' ),
-('JaneSmith', 'Jane', 'Smith'),
-('AliceJohnson', 'Alice', 'Johnson'),
-('BobWilliams', 'Bob', 'Williams'),
-('EvaBrown', 'Eva', 'Brown'),
-('MichaelDavis', 'Michael', 'Davis'),
-('SophiaWhite', 'Sophia', 'White');
-
+('johndoe', 'John', 'Doe' ),
+('janesmith', 'Jane', 'Smith'),
+('alicejohnson', 'Alice', 'Johnson'),
+('bobwilliams', 'Bob', 'Williams'),
+('evabrown', 'Eva', 'Brown'),
+('michaeldavis', 'Michael', 'Davis'),
+('sophiawhite', 'Sophia', 'White')
 GO
 INSERT INTO [dbo].[TransportType] ([description]) VALUES 
 ('Road'),
 ('Ship'),
 ('Airplane'),
-('Train'),
-('Bicycle'),
-('Motorcycle'),
-('Boat');
-
-
+('Train')
 GO
-INSERT INTO [dbo].[Transport] ([TransportName], [type_id]) VALUES 
-('Car', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Road')),
-('Cargo Ship', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Ship')),
-('Boeing 747', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Airplane')),
-('Express Train', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Train')),
-('Mountain Bike', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Bicycle')),
-('Harley Davidson', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Motorcycle')),
-('Sailboat', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Boat'));
-
-
+INSERT INTO [dbo].[Transport] ([TransportName], [type_id], [cost_per_km]) VALUES 
+('Car', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Road'), 30),
+('Cargo Ship', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Ship'), 40),
+('Boeing 747', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Airplane'), 50),
+('Express Train', (SELECT [TransportTypeID] FROM [dbo].[TransportType] WHERE [description] = 'Train'), 45)
 GO
 INSERT INTO [dbo].[TransactionType] ([transaction_code], [TransactionTypeName]) VALUES 
 ('P', 'Purchase'),
@@ -64,10 +53,10 @@ GO
 INSERT INTO [dbo].[Transaction] ([transaction_type], [created_user_id], [updated_user_id], [transported_by_id], [from_location_id], [to_location_id]) VALUES 
 ('P', 1, 1, 2, 3, 1),
 ('S', 2, 2, 4, 5, 2),
-('R', 3, 3, 6, 7, 3),
+('R', 3, 3, 1, 7, 3),
 ('T', 4, 4, 1, 2, 4),
 ('D', 5, 5, 3, 4, 5),
-('L', 6, 6, 5, 6, 6),
+('L', 6, 6, 2, 6, 6),
 ('C', 7, 7, 2, 3, 7);
 
 GO
