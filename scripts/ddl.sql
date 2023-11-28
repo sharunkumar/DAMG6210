@@ -347,5 +347,11 @@ alter table Car add years_in_production as DATEDIFF
 GO
 alter table Car add currently_in_production as case when getdate() < production_year_end then 1 else 0 end
 GO
+create or alter function total_transaction_amount(@transaction_id int) returns float as begin
+return (select sum(total_price) from [TransactionRow] where transaction_id = @transaction_id)
+end
+GO
+alter table [Transaction] add total_amount as dbo.total_transaction_amount(transactionId)
+GO
 USE [master]
 GO
