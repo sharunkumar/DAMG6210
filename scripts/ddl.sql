@@ -309,6 +309,29 @@ ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Transport] CHECK CONSTRAINT [Transport_type_id_fkey]
 GO
+-- non-clustered indexes
+CREATE INDEX idx_transactions_date
+ON [Transaction] (transaction_type)
+-- This will speed up queries filtering by transaction type.
+GO
+CREATE INDEX idx_from_location 
+ON [Transaction] (from_location_id)
+
+CREATE INDEX idx_to_location
+ON [Transaction] (to_location_id)
+-- This will improve join performance with the Locations table.
+GO
+CREATE INDEX idx_batch  
+ON Stock (batch_id)
+
+CREATE INDEX idx_batch_tx
+ON [TransactionRow] (part_batch_id)
+-- Speeds up joins to the Batch table.
+GO
+CREATE INDEX idx_created_user  
+ON [Transaction] (created_user_id) 
+-- Again this helps joins against the Users table.
+GO
 -- computed columns
 alter table TransactionRow add total_price as unit_price * quantity
 GO
