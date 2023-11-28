@@ -1,0 +1,185 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = "sqlserver://127.0.0.1;database=DAMG;trustServerCertificate=true;user=SA;password=YourStrong@Passw0rd"
+}
+
+model Car {
+  CarID                 Int             @id @default(autoincrement())
+  CarName               String          @db.VarChar(250)
+  production_year_start DateTime        @db.DateTimeOffset
+  production_year_end   DateTime        @db.DateTimeOffset
+  brand_id              Int
+  type_id               Int
+  brand                 Brand           @relation(fields: [brand_id], references: [BrandID])
+  type                  CarType         @relation(fields: [type_id], references: [CarTypeID])
+  CarBlueprint          CarBlueprint[]
+  CarProduction         CarProduction[]
+}
+
+model CarType {
+  CarTypeID   Int     @id @default(autoincrement())
+  CarTypeName String  @db.VarChar(100)
+  description String  @db.VarChar(500)
+  is_electric Boolean
+  Car         Car[]
+}
+
+model Brand {
+  BrandID      Int            @id @default(autoincrement())
+  BrandName    String         @db.VarChar(250)
+  location_id  Int            @unique
+  AssemblyUnit AssemblyUnit[]
+  location     Location       @relation(fields: [location_id], references: [LocationID])
+  Car          Car[]
+  Part         Part[]
+}
+
+model Supplier {
+  SupplierID   Int      @id @default(autoincrement())
+  SupplierName String   @db.VarChar(250)
+  location_id  Int      @unique
+  location     Location @relation(fields: [location_id], references: [LocationID])
+}
+
+model Manufacturer {
+  ManufacturerID   Int      @id @default(autoincrement())
+  ManufacturerName String   @db.VarChar(250)
+  location_id      Int      @unique
+  Batch            Batch[]
+  location         Location @relation(fields: [location_id], references: [LocationID])
+}
+
+model Location {
+  LocationID           Int           @id @default(autoincrement())
+  street               String        @db.VarChar(100)
+  city                 String        @db.VarChar(100)
+  zip                  Int
+  latitude             Decimal
+  longitude            Decimal
+  AssemblyUnit         AssemblyUnit?
+  Brand                Brand?
+  Manufacturer         Manufacturer?
+  Stock                Stock[]
+  Supplier             Supplier?
+  OutgoingTransactions Transaction[] @relation("REL_TX_FROM_LOCATION")
+  IncomingTransactions Transaction[] @relation("REL_TX_TO_LOCATION")
+}
+
+model Transport {
+  TransportID             Int           @id @default(autoincrement())
+  TransportName           String        @db.VarChar(250)
+  type_id                 Int
+  TransportedTransactions Transaction[]
+  type                    TransportType @relation(fields: [type_id], references: [TransportTypeID])
+}
+
+model TransportType {
+  TransportTypeID Int         @id @default(autoincrement())
+  description     String      @db.VarChar(500)
+  Transport       Transport[]
+}
+
+model Part {
+  PartID       Int            @id @default(autoincrement())
+  PartName     String         @db.VarChar(250)
+  description  String         @db.VarChar(500)
+  brand_id     Int
+  Batch        Batch[]
+  CarBlueprint CarBlueprint[]
+  brand        Brand          @relation(fields: [brand_id], references: [BrandID])
+}
+
+model Batch {
+  BatchID         Int              @id @default(autoincrement())
+  part_id         Int
+  cost            Float
+  manufacturer_id Int
+  manufacturer    Manufacturer     @relation(fields: [manufacturer_id], references: [ManufacturerID], onUpdate: NoAction)
+  part            Part             @relation(fields: [part_id], references: [PartID], onUpdate: NoAction)
+  Stock           Stock[]
+  TransactionRow  TransactionRow[]
+}
+
+model Stock {
+  batch_id    Int
+  location_id Int
+  quantity    Int
+  batch       Batch    @relation(fields: [batch_id], references: [BatchID])
+  loction     Location @relation(fields: [location_id], references: [LocationID])
+
+  @@unique([batch_id, location_id])
+}
+
+model User {
+  UserID              Int           @id @default(autoincrement())
+  UserName            String        @db.VarChar(250)
+  CreatedTransactions Transaction[] @relation("REL_TX_USER_CREATE")
+  UpdatedTransactions Transaction[] @relation("REL_TX_USER_UPDATE")
+}
+
+model AssemblyUnit {
+  AssemblyUnitID   Int             @id @default(autoincrement())
+  AssemblyUnitName String          @db.VarChar(250)
+  location_id      Int             @unique
+  brand_id         Int
+  owned_by         Brand           @relation(fields: [brand_id], references: [BrandID], onUpdate: NoAction)
+  location         Location        @relation(fields: [location_id], references: [LocationID], onUpdate: NoAction)
+  CarProduction    CarProduction[]
+}
+
+model CarBlueprint {
+  car_id     Int
+  part_id    Int
+  part_count Int
+  car        Car  @relation(fields: [car_id], references: [CarID], onUpdate: NoAction)
+  part       Part @relation(fields: [part_id], references: [PartID], onUpdate: NoAction)
+
+  @@unique([car_id, part_id])
+}
+
+model CarProduction {
+  CarProductionID    Int          @id @default(autoincrement())
+  manufactured_date  DateTime     @db.DateTimeOffset
+  color              String       @db.VarChar(50)
+  manufactured_at_id Int
+  car_id             Int
+  car                Car          @relation(fields: [car_id], references: [CarID])
+  assembly           AssemblyUnit @relation(fields: [manufactured_at_id], references: [AssemblyUnitID], onUpdate: NoAction)
+}
+
+model Transaction {
+  TransactionID     Int              @id @default(autoincrement())
+  transaction_type  String           @db.Char(1)
+  created_user_id   Int
+  updated_user_id   Int
+  transported_by_id Int
+  from_location_id  Int
+  to_location_id    Int
+  created_by        User             @relation("REL_TX_USER_CREATE", fields: [created_user_id], references: [UserID], onUpdate: NoAction)
+  from_location     Location         @relation("REL_TX_FROM_LOCATION", fields: [from_location_id], references: [LocationID], onUpdate: NoAction)
+  to_location       Location         @relation("REL_TX_TO_LOCATION", fields: [to_location_id], references: [LocationID], onUpdate: NoAction)
+  type              TransactionType  @relation(fields: [transaction_type], references: [transaction_code])
+  transported_by    Transport        @relation(fields: [transported_by_id], references: [TransportID])
+  updated_by        User             @relation("REL_TX_USER_UPDATE", fields: [updated_user_id], references: [UserID], onUpdate: NoAction)
+  Rows              TransactionRow[]
+}
+
+model TransactionRow {
+  TransactionRowID Int         @id @default(autoincrement())
+  quantity         Int
+  unit_price       Float
+  part_batch_id    Int
+  transaction_id   Int
+  part             Batch       @relation(fields: [part_batch_id], references: [BatchID])
+  Transaction      Transaction @relation(fields: [transaction_id], references: [TransactionID])
+}
+
+model TransactionType {
+  transaction_code    String        @id @db.Char(1)
+  TransactionTypeName String        @db.VarChar(50)
+  Transaction         Transaction[]
+}
