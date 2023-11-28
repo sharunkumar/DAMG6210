@@ -6,7 +6,11 @@
   "scripts": {
     "push": "prisma db push",
     "pull": "prisma db pull",
-    "gui": "prisma studio"
+    "gui": "prisma studio",
+    "seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
