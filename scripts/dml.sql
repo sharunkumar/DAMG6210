@@ -207,16 +207,6 @@ INSERT INTO [dbo].[CarType] ([CarTypeName], [description], [is_electric]) VALUES
 ('Bus', 'public transport',0),
 ('i-Bus', 'electric public transport',1);
 
-GO
-INSERT INTO [dbo].[Location] ([street], [city], [zip], [latitude], [longitude]) VALUES 
-('111 Alpha Rd', 'Delhi', 1111, 22.7604, -99.3698),
-('222 Gamma Rd', 'Mumbai', 2222, 23.7604, -91.3698),
-('333 Beta Rd', 'Chennai', 3333, 24.7604, -92.3698),
-('444 Acorn Rd', 'Kolkata', 4444, 25.7604, -93.3698),
-('555 Cedar Rd', 'Hyderabad', 5555, 26.7604, -94.3698),
-('666 Dudley Rd', 'Goa', 6666, 27.7604, -95.3698),
-('777 East Rd', 'Kerala', 7777, 28.7604, -96.3698),
-('888 West Rd', 'Punjab', 8888, 29.7604, -97.3698);
 
 
-Select * from Part
+
