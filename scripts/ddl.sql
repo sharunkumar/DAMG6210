@@ -126,8 +126,12 @@ CREATE TABLE [dbo].[Transaction]
 	[transported_by_id] [int] NOT NULL,
 	[from_location_id] [int] NOT NULL,
 	[to_location_id] [int] NOT NULL,
+	[created_date] [datetime2](7) NOT NULL,
+	[updated_date] [datetime2](7) NOT NULL,
 	CONSTRAINT [Transaction_pkey] PRIMARY KEY CLUSTERED ( [TransactionID] ASC )
 )
+GO
+ALTER TABLE [dbo].[Transaction] ADD  CONSTRAINT [Transaction_created_date_df]  DEFAULT (getdate()) FOR [created_date]
 GO
 CREATE TABLE [dbo].[TransactionRow]
 (
