@@ -1,14 +1,13 @@
 USE [DAMG]
 GO
 INSERT INTO [dbo].[User] ([UserName],[FirstName],[LastName]) VALUES 
-('JohnDoe', 'John', 'Doe' ),
-('JaneSmith', 'Jane', 'Smith'),
-('AliceJohnson', 'Alice', 'Johnson'),
-('BobWilliams', 'Bob', 'Williams'),
-('EvaBrown', 'Eva', 'Brown'),
-('MichaelDavis', 'Michael', 'Davis'),
-('SophiaWhite', 'Sophia', 'White');
-
+('johndoe', 'John', 'Doe' ),
+('janesmith', 'Jane', 'Smith'),
+('alicejohnson', 'Alice', 'Johnson'),
+('bobwilliams', 'Bob', 'Williams'),
+('evabrown', 'Eva', 'Brown'),
+('michaeldavis', 'Michael', 'Davis'),
+('sophiawhite', 'Sophia', 'White')
 GO
 INSERT INTO [dbo].[TransportType] ([description]) VALUES 
 ('Road'),
