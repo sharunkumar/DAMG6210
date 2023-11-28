@@ -60,6 +60,21 @@ INSERT INTO [dbo].[Location] ([street], [city], [zip], [latitude], [longitude]) 
 ('777 East Rd', 'Kerala', 7777, 28.7604, -96.3698),
 ('888 West Rd', 'Punjab', 8888, 29.7604, -97.3698);
 
+-- Updated - Need ore locations for other inserts
+
+INSERT INTO [dbo].[Location] ([street], [city], [zip], [latitude], [longitude]) VALUES 
+('505 Oakwood Ln', 'Hillsborough', 54312, 37.3541, -121.9552),
+('606 Redwood Blvd', 'Groveville', 45678, 33.4484, -112.0740),
+('707 Willow Ave', 'Meadowland', 78901, 42.3601, -71.0589),
+('808 Cedar Lane', 'Harbortown', 23456, 39.9526, -75.1652),
+('909 Pine St', 'Lakeview', 65432, 36.7783, -119.4179),
+('111 Birchwood Dr', 'Mountainville', 13579, 35.6895, -105.9378),
+('222 Elmwood Ct', 'Riverside', 87654, 33.6846, -117.8265),
+('333 Maple Blvd', 'Valley City', 11234, 41.2524, -95.9970),
+('444 Cedar Ave', 'Woodside', 56789, 40.7128, -74.0060),
+('555 Spruce Rd', 'Brookside', 98765, 47.6062, -122.3321);
+GO
+
 GO
 INSERT INTO [dbo].[Transaction] ([transaction_type], [created_user_id], [updated_user_id], [transported_by_id], [from_location_id], [to_location_id]) VALUES 
 ('P', 1, 1, 2, 3, 1),
@@ -88,32 +103,37 @@ INSERT INTO [dbo].[Brand] ([BrandName],[location_id]) VALUES
 ('Central Part', 10),
 ('3M Products', 11);
 
+INSERT INTO [dbo].[Brand] ([BrandName], [location_id]) VALUES 
+('Auto Parts Hub', 1),
+('Mega Motors', 2);
 
+-- Updated - No brand with brand_id 1 and 2
 GO
 INSERT INTO [dbo].[Part] ([PartName], [description], [brand_id]) VALUES 
-('GM-Engine', 'The engine block features parts such as the timing chain, camshaft, crankshaft, spark plugs, cylinder heads, valves and pistons.',1),
+('GM-Engine', 'The engine block features parts such as the timing chain, camshaft, crankshaft, spark plugs, cylinder heads, valves and pistons.',3),
 ('3M-Engine', 'The engine block features parts such as the timing chain, camshaft, crankshaft', 5),
 ('CentalPart-Engine', 'The engine block features parts such as the timing chain, camshaft, crankshaft', 4),
 
 ('3M-Transmission','The transmission is a gearbox filled with gears and gear trains that makes effective use of the engines torque to change the gears and power the vehicle.', 5),
-('GM-Transmission','GM transmission is a gearbox filled with gears and gear trains that makes effective use of the engines torque to change the gears and power the vehicle.', 1),
+('GM-Transmission','GM transmission is a gearbox filled with gears and gear trains that makes effective use of the engines torque to change the gears and power the vehicle.', 4),
 ('AmPart-Transmission','AM Part transmission is a gearbox filled with gears and gear trains that makes effective use of the engines torque to change the gears and power the vehicle.', 3),
 
-('CarCare-Battery','The battery delivers the electricity needed to run your vehicles electrical components. Without a battery, your car wont run.', 2),
+('CarCare-Battery','The battery delivers the electricity needed to run your vehicles electrical components. Without a battery, your car wont run.', 5),
 ('3M-Battery','3M battery delivers the electricity needed to run your vehicles electrical components. Without a battery, your car wont run.', 5),
 ('CentalPart-Battery','CentalPart battery delivers the electricity needed to run your vehicles electrical components. Without a battery, your car wont run.', 4),
 
 ('AmPart-Alternator','Part of the electrical system, the alternator charges the battery and powers the electrical system while your car is running.', 3),
 ('CentalPart-Alternator','Central Part of the electrical system, the alternator charges the battery and powers the electrical system while your car is running.', 4),
-('GM-Alternator','GM Part of the electrical system, the alternator charges the battery and powers the electrical system while your car is running.', 1),
+('GM-Alternator','GM Part of the electrical system, the alternator charges the battery and powers the electrical system while your car is running.', 6),
 
 ('CentalPart-Radiator','The radiator is responsible for helping the engine keep cool by removing heat from coolant before it is pumped back through the engine.', 4),
 ('AMPart-Radiator','The radiator is responsible for helping the engine keep cool by removing heat from coolant before it is pumped back through the engine.', 3),
 ('3M-Radiator','The radiator is responsible for helping the engine keep cool by removing heat from coolant before it is pumped back through the engine.', 5),
 
 ('3M-Brake','3M brakes are one of the most important safety systems on your vehicle', 5),
-('CarCare-Brake','Car Care brakes are one of the most important safety systems on your vehicle', 2),
+('CarCare-Brake','Car Care brakes are one of the most important safety systems on your vehicle', 6),
 ('CentalPart-Brake','Central Part brakes are one of the most important safety systems on your vehicle', 4);
+
 
 
 GO
@@ -130,26 +150,27 @@ INSERT INTO [dbo].[AssemblyUnit] ([AssemblyUnitName], [brand_id], [location_id])
 ('Assembly Unit 4', 4, 10),
 ('Assembly Unit 5', 5, 11);
 
+-- Updated - No manufacturer with id 1
 GO
 INSERT INTO [dbo].[Batch] ([cost], [manufacturer_id], [part_id]) VALUES 
-(1000, 1, 2),
-(1100, 1, 3),
-(1200, 1, 4),
-(1300, 1, 5),
-(1400, 1, 6),
-(1500, 1, 7),
-(1600, 1, 8),
-(1700, 1, 9),
-(1800, 1, 10),
-(1900, 1, 11),
-(2000, 1, 12),
-(2100, 1, 13),
-(2200, 1, 14),
-(2300, 1, 15),
-(2400, 1, 16),
-(2500, 1, 17),
-(2600, 1, 18),
-(2700, 1, 1),
+(1000, 4, 2),
+(1100, 4, 3),
+(1200, 4, 4),
+(1300, 4, 5),
+(1400, 4, 6),
+(1500, 4, 7),
+(1600, 4, 8),
+(1700, 4, 9),
+(1800, 4, 10),
+(1900, 4, 11),
+(2000, 4, 12),
+(2100, 4, 13),
+(2200, 4, 14),
+(2300, 4, 15),
+(2400, 4, 16),
+(2500, 4, 17),
+(2600, 4, 18),
+(2700, 4, 19),
 
 (1000, 2, 2),
 (1100, 2, 3),
