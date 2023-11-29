@@ -188,7 +188,7 @@ model TransactionRow {
   unit_price       Float
   part_batch_id    Int
   transaction_id   Int
-  total_price      Float
+  total_price      Float?
   part             Batch       @relation(fields: [part_batch_id], references: [BatchID])
   Transaction      Transaction @relation(fields: [transaction_id], references: [TransactionID])
 
