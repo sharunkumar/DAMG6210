@@ -11,28 +11,28 @@ async function main() {
 
   // add stock for each location and batch id
 
-  for (let i = 0; i < locations.length; i++) {
-    const location = locations[i];
-    for (let j = 0; j < batches.length; j++) {
-      const batch = batches[j];
+  // for (let i = 0; i < locations.length; i++) {
+  //   const location = locations[i];
+  //   for (let j = 0; j < batches.length; j++) {
+  //     const batch = batches[j];
 
-      const quantity = 500 + rand(100);
+  //     const quantity = 500 + rand(100);
 
-      console.log({
-        batch: batch.BatchID,
-        location: location.LocationID,
-        quantity,
-      });
+  //     console.log({
+  //       batch: batch.BatchID,
+  //       location: location.LocationID,
+  //       quantity,
+  //     });
 
-      await prisma.stock.create({
-        data: {
-          batch_id: batch.BatchID,
-          location_id: location.LocationID,
-          quantity,
-        },
-      });
-    }
-  }
+  //     await prisma.stock.create({
+  //       data: {
+  //         batch_id: batch.BatchID,
+  //         location_id: location.LocationID,
+  //         quantity,
+  //       },
+  //     });
+  //   }
+  // }
 
   const runningDate = new Date("2023-01-01");
 
