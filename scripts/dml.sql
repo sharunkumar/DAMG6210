@@ -3743,12 +3743,7 @@ VALUES
     (9, 10, 1),
     (9, 11, 1),
     (9, 16, 1),
-    (9, 17, 4),
-
-    (10, 12, 1),
-    (10, 13, 1),
-    (10, 17, 4),
-    (10, 18, 1);
+    (9, 17, 4);
 GO
 set identity_insert [TransactionRow] on;
 insert [TransactionRow] ([TransactionRowID],[quantity],[unit_price],[part_batch_id],[transaction_id])
@@ -40971,6 +40966,7 @@ GO
 INSERT INTO [dbo].[CarProduction]
     ([manufactured_date], [color], [manufactured_at_id], [car_id])
 VALUES
+    ('2022-01-10', 'Purple', 1, 1),
     ('2000-02-01', 'Red', 2, 2),
     ('2005-06-15', 'Blue', 3, 3),
     ('2010-10-30', 'Black', 4, 4),
@@ -40978,9 +40974,7 @@ VALUES
     ('2020-08-05', 'Silver', 1, 6),
     ('2002-02-12', 'Gray', 2, 7),
     ('2007-07-18', 'Green', 3, 8),
-    ('2012-11-03', 'Yellow', 4, 9),
-    ('2017-05-28', 'Orange', 5, 10),
-    ('2022-01-10', 'Purple', 1, 1);
+    ('2012-11-03', 'Yellow', 4, 9);
 GO
 
 
