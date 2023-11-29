@@ -108,6 +108,15 @@ CREATE TABLE [dbo].[Stock]
 )
 )
 GO
+CREATE TABLE StockAudit (
+    audit_id INT IDENTITY(1,1) PRIMARY KEY,
+    batch_id INT,
+    location_id INT,
+    quantity INT,
+    audit_type VARCHAR(10),
+    audit_date DATETIME DEFAULT GETDATE(),
+);
+GO
 CREATE TABLE [dbo].[Supplier]
 (
 	[SupplierID] [int] IDENTITY(1,1) NOT NULL,
