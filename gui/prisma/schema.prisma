@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlserver"
-  url      = "sqlserver://127.0.0.1;database=DAMG;trustServerCertificate=true;user=SA;password=YourStrong@Passw0rd"
+  url      = "sqlserver://OPTIMUS;database=DAMG;integratedSecurity=true;trustServerCertificate=true;"
 }
 
 model Car {
