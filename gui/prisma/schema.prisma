@@ -10,8 +10,8 @@ datasource db {
 model Car {
   CarID                   Int             @id @default(autoincrement())
   CarName                 String          @db.VarChar(250)
-  production_year_start   DateTime        @db.DateTimeOffset
-  production_year_end     DateTime        @db.DateTimeOffset
+  production_year_start   DateTime        @db.Date
+  production_year_end     DateTime        @db.Date
   brand_id                Int
   type_id                 Int
   years_in_production     Int?
@@ -149,7 +149,7 @@ model CarBlueprint {
 
 model CarProduction {
   CarProductionID    Int          @id @default(autoincrement())
-  manufactured_date  DateTime     @db.DateTimeOffset
+  manufactured_date  DateTime     @db.Date
   color              String       @db.VarChar(50)
   manufactured_at_id Int
   car_id             Int
@@ -165,8 +165,8 @@ model Transaction {
   transported_by_id Int
   from_location_id  Int
   to_location_id    Int
-  created_date      DateTime         @default(now())
-  updated_date      DateTime         @default(now()) @updatedAt
+  created_date      DateTime         @default(now()) @db.DateTime
+  updated_date      DateTime         @default(now()) @updatedAt @db.DateTime
   total_amount      Float?
   created_by        User             @relation("REL_TX_USER_CREATE", fields: [created_user_id], references: [UserID], onUpdate: NoAction)
   from_location     Location         @relation("REL_TX_FROM_LOCATION", fields: [from_location_id], references: [LocationID], onUpdate: NoAction)
