@@ -325,6 +325,8 @@ ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[TransactionRow] CHECK CONSTRAINT [TransactionRow_transaction_id_fkey]
 GO
+ALTER TABLE [dbo].[TransactionRow] ADD CONSTRAINT [TransactionRow_Quantity_Positive] CHECK (quantity >= 0);
+GO
 ALTER TABLE [dbo].[Transport]  WITH CHECK ADD  CONSTRAINT [Transport_type_id_fkey] FOREIGN KEY([type_id])
 REFERENCES [dbo].[TransportType] ([TransportTypeID])
 ON UPDATE CASCADE
