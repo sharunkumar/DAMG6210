@@ -36,8 +36,8 @@ CREATE TABLE [dbo].[Car]
 (
 	[CarID] [int] IDENTITY(1,1) NOT NULL,
 	[CarName] [varchar](250) NOT NULL,
-	[production_year_start] [datetimeoffset](7) NOT NULL,
-	[production_year_end] [datetimeoffset](7) NOT NULL,
+	[production_year_start] DATE NOT NULL,
+	[production_year_end] DATE NOT NULL,
 	[brand_id] [int] NOT NULL,
 	[type_id] [int] NOT NULL,
 	CONSTRAINT [Car_pkey] PRIMARY KEY CLUSTERED ( [CarID] ASC )
@@ -54,7 +54,7 @@ GO
 CREATE TABLE [dbo].[CarProduction]
 (
 	[CarProductionID] [int] IDENTITY(1,1) NOT NULL,
-	[manufactured_date] [datetimeoffset](7) NOT NULL,
+	[manufactured_date] DATE NOT NULL,
 	[color] [varchar](50) NOT NULL,
 	[manufactured_at_id] [int] NOT NULL,
 	[car_id] [int] NOT NULL,
@@ -108,6 +108,15 @@ CREATE TABLE [dbo].[Stock]
 )
 )
 GO
+CREATE TABLE StockAudit (
+    audit_id INT IDENTITY(1,1) PRIMARY KEY,
+    batch_id INT,
+    location_id INT,
+    quantity INT,
+    audit_type VARCHAR(10),
+    audit_date DATETIME DEFAULT GETDATE(),
+);
+GO
 CREATE TABLE [dbo].[Supplier]
 (
 	[SupplierID] [int] IDENTITY(1,1) NOT NULL,
@@ -126,8 +135,8 @@ CREATE TABLE [dbo].[Transaction]
 	[transported_by_id] [int] NOT NULL,
 	[from_location_id] [int] NOT NULL,
 	[to_location_id] [int] NOT NULL,
-	[created_date] [datetime2](7) NOT NULL,
-	[updated_date] [datetime2](7) NOT NULL,
+	[created_date] DATETIME NOT NULL,
+	[updated_date] DATETIME NOT NULL,
 	CONSTRAINT [Transaction_pkey] PRIMARY KEY CLUSTERED ( [TransactionID] ASC )
 )
 GO
@@ -349,44 +358,53 @@ GO
 alter table Car add currently_in_production as case when getdate() < production_year_end then 1 else 0 end
 GO
 create or alter function total_transaction_amount(@transaction_id int) returns float as begin
-return (select sum(total_price) from [TransactionRow] where transaction_id = @transaction_id)
+	return (select sum(total_price)
+	from [TransactionRow]
+	where transaction_id = @transaction_id)
 end
 GO
 alter table [Transaction] add total_amount as dbo.total_transaction_amount(transactionId)
 GO
 create or alter function calc_distance(@lat1 float, @lon1 float, @lat2 float, @lon2 float) returns float as BEGIN
-DECLARE @radius FLOAT = 6371; -- Earth's radius in kilometers
+	DECLARE @radius FLOAT = 6371;
+	-- Earth's radius in kilometers
 
--- Convert latitude and longitude from degrees to radians
-SET @lat1 = RADIANS(@lat1);
-SET @lon1 = RADIANS(@lon1);
-SET @lat2 = RADIANS(@lat2);
-SET @lon2 = RADIANS(@lon2);
+	-- Convert latitude and longitude from degrees to radians
+	SET @lat1 = RADIANS(@lat1);
+	SET @lon1 = RADIANS(@lon1);
+	SET @lat2 = RADIANS(@lat2);
+	SET @lon2 = RADIANS(@lon2);
 
--- Calculate differences
-DECLARE @latDiff FLOAT = @lat2 - @lat1;
-DECLARE @lonDiff FLOAT = @lon2 - @lon1;
+	-- Calculate differences
+	DECLARE @latDiff FLOAT = @lat2 - @lat1;
+	DECLARE @lonDiff FLOAT = @lon2 - @lon1;
 
--- Haversine formula
-DECLARE @a FLOAT = SIN(@latDiff / 2) * SIN(@latDiff / 2) + COS(@lat1) * COS(@lat2) * SIN(@lonDiff / 2) * SIN(@lonDiff / 2);
-DECLARE @c FLOAT = 2 * ATN2(SQRT(@a), SQRT(1 - @a));
-DECLARE @distance FLOAT = @radius * @c;
+	-- Haversine formula
+	DECLARE @a FLOAT = SIN(@latDiff / 2) * SIN(@latDiff / 2) + COS(@lat1) * COS(@lat2) * SIN(@lonDiff / 2) * SIN(@lonDiff / 2);
+	DECLARE @c FLOAT = 2 * ATN2(SQRT(@a), SQRT(1 - @a));
+	DECLARE @distance FLOAT = @radius * @c;
 
-return @distance
+	return @distance
 END
 go
 create or alter function calc_transaction_distance(@transaction_id int) returns float as begin
-declare @from_id INT
-declare @to_id INT
+	declare @from_id INT
+	declare @to_id INT
 
-select @from_id = from_location_id, @to_id= to_location_id from [Transaction] where TransactionID = @transaction_id
+	select @from_id = from_location_id, @to_id= to_location_id
+	from [Transaction]
+	where TransactionID = @transaction_id
 
-declare @lat1 float, @lon1 float, @lat2 float, @lon2 float
+	declare @lat1 float, @lon1 float, @lat2 float, @lon2 float
 
-select @lat1 = latitude, @lon1 = longitude from [Location] where LocationID = @from_id
-select @lat2 = latitude, @lon2 = longitude from [Location] where LocationID = @to_id
+	select @lat1 = latitude, @lon1 = longitude
+	from [Location]
+	where LocationID = @from_id
+	select @lat2 = latitude, @lon2 = longitude
+	from [Location]
+	where LocationID = @to_id
 
-return dbo.calc_distance(@lat1, @lon1, @lat2, @lon2)
+	return dbo.calc_distance(@lat1, @lon1, @lat2, @lon2)
 end
 go
 USE [master]
