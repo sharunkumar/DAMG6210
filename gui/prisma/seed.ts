@@ -52,6 +52,7 @@ async function main() {
           updated_user_id: needle(users).UserID,
           transported_by_id: needle(transports).TransportID,
           created_date: runningDate,
+          updated_date: runningDate,
         },
       });
       for (let i = 0; i < 10; i++) {
