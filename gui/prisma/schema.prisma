@@ -15,7 +15,7 @@ model Car {
   brand_id                Int
   type_id                 Int
   years_in_production     Int?
-  currently_in_production Int
+  currently_in_production Int?
   brand                   Brand           @relation(fields: [brand_id], references: [BrandID])
   type                    CarType         @relation(fields: [type_id], references: [CarTypeID])
   CarBlueprint            CarBlueprint[]
