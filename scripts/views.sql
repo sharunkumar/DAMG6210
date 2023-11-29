@@ -39,7 +39,12 @@ GO
 create or alter view transaction_logistics
 as
     select dbo.calc_distance(f.latitude, f.longitude, t.latitude, t.longitude) [TransportationDistance], [transaction].*
-    from [Transaction] left join [Location] [f] on [Transaction].from_location_id = f.LocationID
-        left join [Location] [t] on [Transaction].to_location_id = t.LocationID
+    from [Transaction] inner join [Location] [f] on [Transaction].from_location_id = f.LocationID
+        inner join [Location] [t] on [Transaction].to_location_id = t.LocationID
+        inner join [Transport] tr on tr.TransportID = [Transaction].transported_by_id
 go
 -- select * from transaction_logistics
+
+
+select *
+from transaction_logistics
