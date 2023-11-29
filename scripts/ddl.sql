@@ -109,12 +109,13 @@ CREATE TABLE [dbo].[Stock]
 )
 GO
 CREATE TABLE StockAudit (
-    audit_id INT IDENTITY(1,1) PRIMARY KEY,
+    audit_id INT IDENTITY(1,1) NOT NULL,
     batch_id INT,
     location_id INT,
     quantity INT,
     audit_type VARCHAR(10),
-    audit_date DATETIME DEFAULT GETDATE(),
+    audit_date DATETIME,
+	CONSTRAINT [StockAudit_pkey] PRIMARY KEY CLUSTERED ( [audit_id] ASC )
 );
 GO
 CREATE TABLE [dbo].[Supplier]
@@ -139,6 +140,8 @@ CREATE TABLE [dbo].[Transaction]
 	[updated_date] DATETIME NOT NULL,
 	CONSTRAINT [Transaction_pkey] PRIMARY KEY CLUSTERED ( [TransactionID] ASC )
 )
+GO
+ALTER TABLE [dbo].[StockAudit] ADD  CONSTRAINT [StockAudit_date_df]  DEFAULT (getdate()) FOR [audit_date]
 GO
 ALTER TABLE [dbo].[Transaction] ADD  CONSTRAINT [Transaction_created_date_df]  DEFAULT (getdate()) FOR [created_date]
 GO

@@ -200,3 +200,12 @@ model TransactionType {
   TransactionTypeName String        @db.VarChar(50)
   Transaction         Transaction[]
 }
+
+model StockAudit {
+  audit_id    Int       @id @default(autoincrement())
+  batch_id    Int?
+  location_id Int?
+  quantity    Int?
+  audit_type  String?   @db.VarChar(10)
+  audit_date  DateTime? @default(now(), map: "StockAudit_date_df") @db.DateTime
+}
