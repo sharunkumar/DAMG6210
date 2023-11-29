@@ -44,8 +44,20 @@ as
         inner join [Location] [t] on [Transaction].to_location_id = t.LocationID
         inner join [Transport] tr on tr.TransportID = [Transaction].transported_by_id
 go
+create or alter view sales_by_date
+as
+    select convert(DATE,created_date) TDATE, sum(total_amount) SalesForTheDay
+    from [Transaction]
+    group by convert(DATE,created_date)
+go
+create or alter view sales_by_month
+as
+    select MONTH(created_date) TDATE, sum(total_amount) SalesForTheMonth
+    from [Transaction]
+    group by MONTH(created_date)
+go
 -- select * from transaction_logistics
 
 
-select *
-from transaction_logistics
+-- select *
+-- from transaction_logistics
