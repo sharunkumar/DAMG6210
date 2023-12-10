@@ -5,8 +5,34 @@ async function main() {
   const locations = await prisma.location.findMany();
   const users = await prisma.user.findMany();
   const transports = await prisma.transport.findMany();
+  const batches = await prisma.batch.findMany();
 
   // const parts = await prisma.part.findMany();
+
+  // add stock for each location and batch id
+
+  for (let i = 0; i < locations.length; i++) {
+    const location = locations[i];
+    for (let j = 0; j < batches.length; j++) {
+      const batch = batches[j];
+
+      const quantity = 500 + rand(100);
+
+      console.log({
+        batch: batch.BatchID,
+        location: location.LocationID,
+        quantity,
+      });
+
+      await prisma.stock.create({
+        data: {
+          batch_id: batch.BatchID,
+          location_id: location.LocationID,
+          quantity,
+        },
+      });
+    }
+  }
 
   const runningDate = new Date("2023-01-01");
 
@@ -27,26 +53,9 @@ async function main() {
           created_date: runningDate,
         },
       });
-      const batches = await prisma.batch.findMany();
       for (let i = 0; i < 10; i++) {
         const batch = needle(batches);
         const quantity = rand(20);
-        await prisma.stock.upsert({
-          where: {
-            batch_id_location_id: {
-              batch_id: batch.BatchID,
-              location_id: transaction.from_location_id,
-            },
-          },
-          create: {
-            quantity: quantity + rand(20),
-            batch_id: batch.BatchID,
-            location_id: transaction.from_location_id,
-          },
-          update: {
-            quantity: quantity + rand(20),
-          },
-        });
         await prisma.transactionRow.createMany({
           data: {
             part_batch_id: batch.BatchID,
