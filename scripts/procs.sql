@@ -70,6 +70,6 @@ BEGIN
         INNER JOIN
         [dbo].[TransportType] tt ON t.[type_id] = tt.[TransportTypeID]
     WHERE
-        t.[cost_per_km] BETWEEN @minCost AND @maxCost;
+        t.[cost_per_km] BETWEEN @minCost AND @maxCost;
 END
 GO
