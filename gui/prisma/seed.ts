@@ -30,10 +30,27 @@ async function main() {
       const batches = await prisma.batch.findMany();
       for (let i = 0; i < 10; i++) {
         const batch = needle(batches);
+        const quantity = rand(20);
+        await prisma.stock.upsert({
+          where: {
+            batch_id_location_id: {
+              batch_id: batch.BatchID,
+              location_id: transaction.from_location_id,
+            },
+          },
+          create: {
+            quantity: quantity + rand(20),
+            batch_id: batch.BatchID,
+            location_id: transaction.from_location_id,
+          },
+          update: {
+            quantity: quantity + rand(20),
+          },
+        });
         await prisma.transactionRow.createMany({
           data: {
             part_batch_id: batch.BatchID,
-            quantity: rand(20),
+            quantity,
             transaction_id: transaction.TransactionID,
             unit_price: batch.cost,
           },
