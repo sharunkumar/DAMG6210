@@ -212,19 +212,16 @@ ALTER TABLE [dbo].[Batch] CHECK CONSTRAINT [Batch_part_id_fkey]
 GO
 ALTER TABLE [dbo].[Brand]  WITH CHECK ADD  CONSTRAINT [Brand_location_id_fkey] FOREIGN KEY([location_id])
 REFERENCES [dbo].[Location] ([LocationID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Brand] CHECK CONSTRAINT [Brand_location_id_fkey]
 GO
 ALTER TABLE [dbo].[Car]  WITH CHECK ADD  CONSTRAINT [Car_brand_id_fkey] FOREIGN KEY([brand_id])
 REFERENCES [dbo].[Brand] ([BrandID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Car] CHECK CONSTRAINT [Car_brand_id_fkey]
 GO
 ALTER TABLE [dbo].[Car]  WITH CHECK ADD  CONSTRAINT [Car_type_id_fkey] FOREIGN KEY([type_id])
 REFERENCES [dbo].[CarType] ([CarTypeID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Car] CHECK CONSTRAINT [Car_type_id_fkey]
 GO
@@ -242,7 +239,6 @@ ALTER TABLE [dbo].[CarBlueprint] ADD CONSTRAINT [Blueprint_Count_Positive] CHECK
 GO
 ALTER TABLE [dbo].[CarProduction]  WITH CHECK ADD  CONSTRAINT [CarProduction_car_id_fkey] FOREIGN KEY([car_id])
 REFERENCES [dbo].[Car] ([CarID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[CarProduction] CHECK CONSTRAINT [CarProduction_car_id_fkey]
 GO
@@ -253,25 +249,21 @@ ALTER TABLE [dbo].[CarProduction] CHECK CONSTRAINT [CarProduction_manufactured_a
 GO
 ALTER TABLE [dbo].[Manufacturer]  WITH CHECK ADD  CONSTRAINT [Manufacturer_location_id_fkey] FOREIGN KEY([location_id])
 REFERENCES [dbo].[Location] ([LocationID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Manufacturer] CHECK CONSTRAINT [Manufacturer_location_id_fkey]
 GO
 ALTER TABLE [dbo].[Part]  WITH CHECK ADD  CONSTRAINT [Part_brand_id_fkey] FOREIGN KEY([brand_id])
 REFERENCES [dbo].[Brand] ([BrandID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Part] CHECK CONSTRAINT [Part_brand_id_fkey]
 GO
 ALTER TABLE [dbo].[Stock]  WITH CHECK ADD  CONSTRAINT [Stock_batch_id_fkey] FOREIGN KEY([batch_id])
 REFERENCES [dbo].[Batch] ([BatchID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Stock] CHECK CONSTRAINT [Stock_batch_id_fkey]
 GO
 ALTER TABLE [dbo].[Stock]  WITH CHECK ADD  CONSTRAINT [Stock_location_id_fkey] FOREIGN KEY([location_id])
 REFERENCES [dbo].[Location] ([LocationID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Stock] CHECK CONSTRAINT [Stock_location_id_fkey]
 GO
@@ -279,7 +271,6 @@ ALTER TABLE [dbo].[Stock] ADD CONSTRAINT [Stock_Quantity_Positive] CHECK (quanti
 GO
 ALTER TABLE [dbo].[Supplier]  WITH CHECK ADD  CONSTRAINT [Supplier_location_id_fkey] FOREIGN KEY([location_id])
 REFERENCES [dbo].[Location] ([LocationID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Supplier] CHECK CONSTRAINT [Supplier_location_id_fkey]
 GO
@@ -300,13 +291,11 @@ ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [Transaction_to_location_id_fke
 GO
 ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [Transaction_transaction_type_fkey] FOREIGN KEY([transaction_type])
 REFERENCES [dbo].[TransactionType] ([transaction_code])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [Transaction_transaction_type_fkey]
 GO
 ALTER TABLE [dbo].[Transaction]  WITH CHECK ADD  CONSTRAINT [Transaction_transported_by_id_fkey] FOREIGN KEY([transported_by_id])
 REFERENCES [dbo].[Transport] ([TransportID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [Transaction_transported_by_id_fkey]
 GO
@@ -317,13 +306,11 @@ ALTER TABLE [dbo].[Transaction] CHECK CONSTRAINT [Transaction_updated_user_id_fk
 GO
 ALTER TABLE [dbo].[TransactionRow]  WITH CHECK ADD  CONSTRAINT [TransactionRow_part_batch_id_fkey] FOREIGN KEY([part_batch_id])
 REFERENCES [dbo].[Batch] ([BatchID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[TransactionRow] CHECK CONSTRAINT [TransactionRow_part_batch_id_fkey]
 GO
 ALTER TABLE [dbo].[TransactionRow]  WITH CHECK ADD  CONSTRAINT [TransactionRow_transaction_id_fkey] FOREIGN KEY([transaction_id])
 REFERENCES [dbo].[Transaction] ([TransactionID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[TransactionRow] CHECK CONSTRAINT [TransactionRow_transaction_id_fkey]
 GO
@@ -331,7 +318,6 @@ ALTER TABLE [dbo].[TransactionRow] ADD CONSTRAINT [TransactionRow_Quantity_Posit
 GO
 ALTER TABLE [dbo].[Transport]  WITH CHECK ADD  CONSTRAINT [Transport_type_id_fkey] FOREIGN KEY([type_id])
 REFERENCES [dbo].[TransportType] ([TransportTypeID])
-ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Transport] CHECK CONSTRAINT [Transport_type_id_fkey]
 GO
