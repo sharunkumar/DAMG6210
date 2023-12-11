@@ -273,7 +273,7 @@ ON UPDATE CASCADE
 GO
 ALTER TABLE [dbo].[Stock] CHECK CONSTRAINT [Stock_location_id_fkey]
 GO
-ALTER TABLE [dbo].[Stock] ADD CONSTRAINT [chk_quantity_positive] CHECK (quantity >= 0);
+ALTER TABLE [dbo].[Stock] ADD CONSTRAINT [Stock_Quantity_Positive] CHECK (quantity >= 0);
 GO
 ALTER TABLE [dbo].[Supplier]  WITH CHECK ADD  CONSTRAINT [Supplier_location_id_fkey] FOREIGN KEY([location_id])
 REFERENCES [dbo].[Location] ([LocationID])
