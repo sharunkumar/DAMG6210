@@ -227,41 +227,27 @@ INSERT INTO [dbo].[CarType]
     ([CarTypeName], [description], [is_electric])
 VALUES
     ('Sedan', 'Medium size vehicle', 0),
-    ('i-Sedan', 'Medium size e-vehicle', 1),
-    ('Hybrid-Sedan', 'Electric and gas vehicle', 1),
+    ('Electric Sedan', 'Medium size e-vehicle', 1),
+    ('Hybrid Sedan', 'Electric and gas vehicle', 1),
     ('SUV', 'Big size Vehicle', 0),
-    ('i-SUV', 'Big size e-Vehicle', 1),
+    ('e-SUV', 'Big size e-Vehicle', 1),
     ('Hatchback', 'small size Vehicle', 0),
-    ('i-Hatchback', 'small e-size Vehicle', 1),
+    ('e-Hatchback', 'small e-size Vehicle', 1),
     ('Truck', 'heavy Vehicle', 0),
-    ('i-Truck', 'heavy e-Vehicle', 1),
-    ('Bike', 'two wheeler', 0),
-    ('i-Bike', 'electric two wheeler', 1),
-    ('Bus', 'public transport', 0),
-    ('i-Bus', 'electric public transport', 1);
+    ('e-Truck', 'heavy e-Vehicle', 1)
 GO
 INSERT INTO [dbo].[Car]
     ([CarName], [production_year_start], [production_year_end], [brand_id], [type_id])
 VALUES
     ('Honda Accord', '2000-11-28 23:43:34.000', '2020-12-31T23:59:59.9999999Z', 3, 1),
-    -- Sedan
     ('Chevrolet Bolt', '2002-01-01T00:00:00.0000000Z', '2024-12-31T23:59:59.9999999Z', 4, 2),
-    -- i-Sedan (electric)
     ('Toyota Prius', '2001-01-01T00:00:00.0000000Z', '2022-12-31T23:59:59.9999999Z', 5, 3),
-    -- Hybrid-Sedan
     ('Ford Explorer', '2002-01-01T00:00:00.0000000Z', '2019-12-31T23:59:59.9999999Z', 1, 4),
-    -- SUV
     ('Tesla Model X', '2010-01-01T00:00:00.0000000Z', '2020-12-31T23:59:59.9999999Z', 2, 5),
-    -- i-SUV (electric)
     ('Volkswagen Golf', '2015-01-01T00:00:00.0000000Z', '2018-12-31T23:59:59.9999999Z', 3, 6),
-    -- Hatchback
     ('Nissan Leaf', '2017-01-01T00:00:00.0000000Z', '2019-12-31T23:59:59.9999999Z', 4, 7),
-    -- i-Hatchback (electric)
     ('Ford F-150', '2015-01-01T00:00:00.0000000Z', '2020-12-31T23:59:59.9999999Z', 1, 8),
-    -- Truck
-    ('Rivian R1T', '2016-01-01T00:00:00.0000000Z', '2018-12-31T23:59:59.9999999Z', 2, 9),
-    -- i-Truck (electric)
-    ('Harley-Davidson Fat Boy', '2019-01-01T00:00:00.0000000Z', '2021-12-31T23:59:59.9999999Z', 3, 10); -- Bike
+    ('Rivian R1T', '2016-01-01T00:00:00.0000000Z', '2018-12-31T23:59:59.9999999Z', 2, 9)
 GO
 INSERT INTO [dbo].[CarBlueprint]
     ([car_id], [part_id], [part_count])
