@@ -6,6 +6,7 @@ async function main() {
   const users = await prisma.user.findMany();
   const transports = await prisma.transport.findMany();
   const batches = await prisma.batch.findMany();
+  const transactionTypes = await prisma.transactionType.findMany();
 
   // const parts = await prisma.part.findMany();
 
@@ -46,7 +47,7 @@ async function main() {
         data: {
           from_location_id: needle(locations).LocationID,
           to_location_id: needle(locations).LocationID,
-          transaction_type: "S",
+          transaction_type: needle(transactionTypes).transaction_code,
           created_user_id: needle(users).UserID,
           updated_user_id: needle(users).UserID,
           transported_by_id: needle(transports).TransportID,
