@@ -238,6 +238,8 @@ REFERENCES [dbo].[Part] ([PartID])
 GO
 ALTER TABLE [dbo].[CarBlueprint] CHECK CONSTRAINT [CarBlueprint_part_id_fkey]
 GO
+ALTER TABLE [dbo].[CarBlueprint] ADD CONSTRAINT [Blueprint_Count_Positive] CHECK (part_count >= 0);
+GO
 ALTER TABLE [dbo].[CarProduction]  WITH CHECK ADD  CONSTRAINT [CarProduction_car_id_fkey] FOREIGN KEY([car_id])
 REFERENCES [dbo].[Car] ([CarID])
 ON UPDATE CASCADE
