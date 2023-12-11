@@ -87,5 +87,13 @@ BEGIN
 
 END
 GO
+CREATE OR ALTER TRIGGER Prevent_CarProduction_Update_Delete ON CarProduction
+INSTEAD OF DELETE, UPDATE
+AS
+BEGIN
+    RAISERROR('Updates and deletes are not allowed on this table.', 16, 1);
+    ROLLBACK TRANSACTION;
+END
+GO
 use master
 go
