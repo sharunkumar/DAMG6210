@@ -44,6 +44,13 @@
 - `calc_distance(@lat1 float, @lon1 float, @lat2 float, @lon2 float)` - returns distance between a pair of latitudes and longitudes
 - `calc_transaction_distance(@transaction_id int)` - returns the distance between the from location and to location of a transaction
 
+### Views
+
+- `sales_by_parts` - returns sales data grouped by parts (Used in PowerBI)
+- `transaction_logistics` - returns logistic information (transport cost, etc) per transaction (Used in PowerBI)
+- `sales_by_date` - returns daily sales data (Used in PowerBI)
+- `sales_by_month` - returns monthly sales data (Used in PowerBI)
+
 ## Final ERD
 
 ![](../diagrams/erd.png)
