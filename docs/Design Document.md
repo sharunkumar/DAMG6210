@@ -31,6 +31,13 @@
 - `Prevent_CarProduction_Update_Delete` - Trigger for preventing updates/deletes on the `CarProduction` table
 - `CarProduction_Stock_Consume` - When a car is produced (Inserted into `CarProduction` table), the stock from the assembly unit's location is automatically consumed
 
+### Procedures
+
+- `GetTotalCostForCar` - Gets an estimated cost to produce a car
+- `GetPartsWithLowStock` - Gets a `@thresholdQuantity` input to give the parts that are low on stock
+- `GetCarsInProduction` - Returns a list of cars in production
+- `GetTransportsByCostRange` - Returns a list of transports that range between `@minCost` and `@maxCost`
+
 ## Final ERD
 
 ![](../diagrams/erd.png)
