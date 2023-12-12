@@ -24,6 +24,13 @@
 - `TransactionType` - Represents the type of `Transaction` (Sales/Purchase/etc.)
 - `StockAudit` - When stock is updated, entries are added to this table for auditing
 
+### Triggers
+
+- `StockAuditTrigger` - Trigger that updates the `StockAudit` table based on inserts/updates/deletes on `Stock` table
+- `StockUpdate` - Updates the `Stock` table whenever an entry is added/updated/deleted on the `TransactionRow` table
+- `Prevent_CarProduction_Update_Delete` - Trigger for preventing updates/deletes on the `CarProduction` table
+- `CarProduction_Stock_Consume` - When a car is produced (Inserted into `CarProduction` table), the stock from the assembly unit's location is automatically consumed
+
 ## Final ERD
 
 ![](../diagrams/erd.png)
