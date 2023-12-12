@@ -38,6 +38,12 @@
 - `GetCarsInProduction` - Returns a list of cars in production
 - `GetTransportsByCostRange` - Returns a list of transports that range between `@minCost` and `@maxCost`
 
+### Functions
+
+- `total_transaction_amount(@transaction_id int)` - returns total transaction amount for a given transaction ID
+- `calc_distance(@lat1 float, @lon1 float, @lat2 float, @lon2 float)` - returns distance between a pair of latitudes and longitudes
+- `calc_transaction_distance(@transaction_id int)` - returns the distance between the from location and to location of a transaction
+
 ## Final ERD
 
 ![](../diagrams/erd.png)
